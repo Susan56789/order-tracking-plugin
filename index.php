@@ -1,13 +1,13 @@
 <?php
 /**
- * Plugin Name: Order Tracking Plugin
+ * Plugin Name: Order Tracking plugin
  * Plugin URI: https://github.com/Susan56789/order-tracking-plugin
- * Description: Allows customers to track their orders by order ID and email.
+ * Description: After every purchase, a customer wants to track the status of their order.Order Tracking Plugin Allows customers to track their orders by order ID and email.
  * Version: 1.0
  * Author: Susan
  * Author URI: https://susanwairimu.netlify.app/
 *License: GPL2 or later
-*License URI: https://www.gnu.org/licenses/gpl-2.0.html
+*License URI: https://www.gnu.org/licenses/gpl-3.0.html
  */
 
 // Shortcode to display the order tracking form
