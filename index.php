@@ -11,10 +11,10 @@ function order_tracking_form_shortcode() {
     ob_start();
     ?>
     <form id="order-tracking-form" action="" method="post">
-        <p><label for="order_id">Order ID:</label><br />
+        <p><label for="order_id">Order ID:</label>
         <input type="text" name="order_id" id="order_id" required /></p>
         
-        <p><label for="email">Email:</label><br />
+        <p><label for="email">Email:</label>
         <input type="email" name="email" id="email" required /></p>
         
         <p><input type="submit" name="submit" value="Track Order" /></p>
@@ -37,25 +37,39 @@ function order_status_shortcode($atts) {
             $status_date = $order->get_date_created();
             $items = $order->get_items();
 
-            // Display the order status
-            echo '<p>Order Status: ' . $status . '</p>';
-            echo '<p>Date Status Changed: ' . $status_date->format('Y-m-d H:i:s') . '</p>';
 
             // Display the product details
-            echo '<h2>Product Details:</h2>';
-            echo '<ul>';
+            echo '<h2 style="margin-bottom: 10px">Order #'.$order_id.' Details:</h2>';
+            echo '<table>';
+            echo '<tr><td>Image</td><td>Name</td><td>Status</td><td>Time</td></tr>';
             foreach ($items as $item) {
                 $product = $item->get_product();
                 $product_name = $product->get_name();
                 $product_image = $product->get_image();
-
-                echo '<li>';
-                echo $product_image;
-                echo '<strong>' . $product_name . '</strong><br>';
-                echo 'Product Status: ' . $status . '<br>';
-                echo '</li>';
+                echo '<tr>';
+                echo '<td style="width: 100px; height: 100px">' . $product_image . '</td>';
+                echo '<td>' . $product_name . '</td>';
+                echo '<td>' ; 
+                if($status == "processing"){
+                echo '<span style="color:white; border-radius: 5px; padding: 5px 10px; background-color: green">' . $status . '</span>';
+                }
+                elseif($status == "Shipping"){
+                echo '<span style="color:white; border-radius: 5px; padding: 5px 10px; background-color: blue">' . $status . '</span>';
+                }
+                elseif($status == "on-hold"){
+                echo '<span style="color:white; border-radius: 5px; padding: 5px 10px; background-color: orange">' . $status . '</span>';
+                }
+                elseif($status == "completed"){
+                echo '<span style="color:white; border-radius: 5px; padding: 5px 10px; background-color: black"> ' . $status . '</span>';
+                }
+                elseif($status == "cancelled"){
+                echo '<span style="color:white; border-radius: 5px; padding: 5px 10px; background-color: red">' . $status . '</span>';
+                }
+                echo '</td>';
+                echo '<td>' . $status_date->format('Y-m-d H:i:s') . '</td>';
+                echo '</tr>';
             }
-            echo '</ul>';
+            echo '</table>';
 
             return;
         }
